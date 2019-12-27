@@ -22,6 +22,7 @@ public class LoggerTest {
         log.info("name: {}, password: {}", name, password);
         log.debug("debug...");
         log.info("info...");
+        log.warn("warn...");
         log.error("error");
     }
 }
