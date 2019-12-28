@@ -1,6 +1,7 @@
 package me.jmix.brothertakeaway;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ public class LoggerTest {
     // private final Logger logger = LoggerFactory.getLogger(LoggerTest.class);
 
     @Test
+    @Ignore
     public void test1() {
         String name = "imooc";
         String password = "123456";
