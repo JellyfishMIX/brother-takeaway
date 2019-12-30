@@ -6,6 +6,7 @@ create table `tb_product_info` (
     `product_description` varchar(64) comment '描述',
     `product_icon` varchar(512) comment '商品小图',
     `category_type` int not null comment '类目编号',
+    `product_status` tinyint(3) not null default '0' comment '商品状态，0上架，1下架',
     `create_time` timestamp not null default current_timestamp comment '创建时间',
     `update_time` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
     primary key (`product_id`)
