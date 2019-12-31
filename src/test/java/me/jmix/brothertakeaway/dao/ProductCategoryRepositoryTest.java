@@ -24,7 +24,7 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     @Disabled
-    public void testSave() {
+    void testSave() {
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategoryId(2);
         productCategory.setCategoryName("女生最爱");
@@ -34,7 +34,7 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     @Disabled
-    public void testUpdate() {
+    void testUpdate() {
         ProductCategory productCategory = productCategoryRepository.findById(2).orElse(null);
         productCategory.setCategoryType(6);
         productCategoryRepository.save(productCategory);
@@ -43,7 +43,7 @@ public class ProductCategoryRepositoryTest {
     @Test
     @Transactional
     @Disabled
-    public void testSave2() {
+    void testSave2() {
         ProductCategory productCategory = new ProductCategory("小孩最爱", 10);
         ProductCategory result = productCategoryRepository.save(productCategory);
         assertNotNull(result);
@@ -51,7 +51,7 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     @Disabled
-    public void testFindByCategoryTypeIn() {
+    void testFindByCategoryTypeIn() {
         List<Integer> integerList = Arrays.asList(9, 10, 11);
         List<ProductCategory> productCategoryList = productCategoryRepository.findByCategoryTypeIn(integerList);
         assertNotEquals(0, productCategoryList.size());

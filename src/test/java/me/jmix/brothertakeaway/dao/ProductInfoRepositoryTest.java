@@ -21,7 +21,7 @@ public class ProductInfoRepositoryTest {
 
     @Test
     @Disabled
-    public void testSaveProduct() {
+    void testSaveProduct() {
         ProductInfo productInfo = new ProductInfo();
         productInfo.setProductId("123456");
         productInfo.setProductName("皮蛋粥");
@@ -37,7 +37,7 @@ public class ProductInfoRepositoryTest {
 
     @Test
     @Disabled
-    public void testFindByProductStatus() {
+    void testFindByProductStatus() {
         List<ProductInfo> productInfoList = productInfoRepository.findByProductStatus(0);
         assertNotEquals(0, productInfoList.size());
     }
