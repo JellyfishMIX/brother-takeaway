@@ -18,7 +18,7 @@ public class LoggerTest {
 
     @Test
     @Disabled
-    public void test1() {
+    void test1() {
         String name = "imooc";
         String password = "123456";
         log.info("name: " + name + ", password: " + password);
