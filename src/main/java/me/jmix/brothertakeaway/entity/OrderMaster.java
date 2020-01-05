@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ import java.util.Date;
 @DynamicUpdate
 public class OrderMaster {
     // 订单Id
+    @Id
     private String orderId;
 
     // 顾客名字
