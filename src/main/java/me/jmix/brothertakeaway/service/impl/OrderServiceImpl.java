@@ -28,6 +28,11 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
+    /**
+     * 创建订单
+     * @param orderDTO
+     * @return
+     */
     @Override
     public OrderDTO CreateOrder(OrderDTO orderDTO) {
         // 在创建订单的最开始，生成此订单的Id
@@ -63,26 +68,52 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
+    /**
+     * 查询单个订单
+     * @param orderId
+     * @return
+     */
     @Override
     public OrderDTO getOrderByOrderId(String orderId) {
         return null;
     }
 
+    /**
+     * 查询订单列表
+     * @param customerOpenId
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<OrderDTO> getOrderByCustomerOpenid(String customerOpenId, Pageable pageable) {
         return null;
     }
 
+    /**
+     * 取消订单
+     * @param orderDTO
+     * @return
+     */
     @Override
     public OrderDTO cancelOrder(OrderDTO orderDTO) {
         return null;
     }
 
+    /**
+     * 完结订单
+     * @param orderDTO
+     * @return
+     */
     @Override
     public OrderDTO finishOrder(OrderDTO orderDTO) {
         return null;
     }
 
+    /**
+     * 支付订单
+     * @param orderDTO
+     * @return
+     */
     @Override
     public OrderDTO payOrder(OrderDTO orderDTO) {
         return null;
