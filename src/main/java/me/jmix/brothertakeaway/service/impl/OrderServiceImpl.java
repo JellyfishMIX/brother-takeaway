@@ -58,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
         orderMasterRepository.save(orderMaster);
 
         // 4. 扣库存
+        // 需要再加入增减库存方法
 
         return null;
     }
