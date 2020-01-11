@@ -1,5 +1,6 @@
 package me.jmix.brothertakeaway.service;
 
+import me.jmix.brothertakeaway.dto.ShoppingCartDTO;
 import me.jmix.brothertakeaway.entity.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,4 +33,16 @@ public interface ProductService {
      * @return
      */
     ProductInfo addProduct(ProductInfo productInfo);
+
+    /**
+     * 加库存
+     * @param shoppingCartDTOList
+     */
+    void increaseStock(List<ShoppingCartDTO> shoppingCartDTOList);
+
+    /**
+     * 减库存
+     * @param shoppingCartDTOList
+     */
+    void decreaseStock(List<ShoppingCartDTO> shoppingCartDTOList);
 }

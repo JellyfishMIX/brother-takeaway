@@ -1,13 +1,17 @@
 package me.jmix.brothertakeaway.service.impl;
 
 import me.jmix.brothertakeaway.dao.ProductInfoRepository;
+import me.jmix.brothertakeaway.dto.ShoppingCartDTO;
 import me.jmix.brothertakeaway.entity.ProductInfo;
+import me.jmix.brothertakeaway.enums.ProductServiceStateEnum;
 import me.jmix.brothertakeaway.enums.ProductStateEnum;
+import me.jmix.brothertakeaway.exception.ProductServiceException;
 import me.jmix.brothertakeaway.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,5 +42,28 @@ public class ProductServiceImpl implements ProductService {
     public ProductInfo addProduct(ProductInfo productInfo) {
         ProductInfo productInfoResult = productInfoRepository.save(productInfo);
         return productInfoResult;
+    }
+
+    @Override
+    public void increaseStock(List<ShoppingCartDTO> shoppingCartDTOList) {
+
+    }
+
+    @Override
+    @Transactional
+    public void decreaseStock(List<ShoppingCartDTO> shoppingCartDTOList) {
+        for (ShoppingCartDTO shoppingCartDTO : shoppingCartDTOList) {
+            ProductInfo productInfo = productInfoRepository.findById(shoppingCartDTO.getProductId()).orElse(null);
+            if (productInfo == null) {
+                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_NOT_EXIT);
+            }
+
+            Integer result = productInfo.getProductStock() - shoppingCartDTO.getProductQuantity();
+            if (result < 0) {
+                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(result);
+            productInfoRepository.save(productInfo);
+        }
     }
 }

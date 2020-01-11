@@ -3,6 +3,7 @@ package me.jmix.brothertakeaway.service.impl;
 import me.jmix.brothertakeaway.dao.OrderDetailRepository;
 import me.jmix.brothertakeaway.dao.OrderMasterRepository;
 import me.jmix.brothertakeaway.dto.OrderDTO;
+import me.jmix.brothertakeaway.dto.ShoppingCartDTO;
 import me.jmix.brothertakeaway.entity.OrderDetail;
 import me.jmix.brothertakeaway.entity.OrderMaster;
 import me.jmix.brothertakeaway.entity.ProductInfo;
@@ -18,6 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -62,8 +65,10 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMasterRepository.save(orderMaster);
 
-        // 4. 扣库存
+        // 4. 减库存
         // 需要再加入增减库存方法
+        List<ShoppingCartDTO> shoppingCartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
+                new ShoppingCartDTO(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
 
         return null;
     }
