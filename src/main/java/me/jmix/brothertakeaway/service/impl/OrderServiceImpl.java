@@ -7,7 +7,9 @@ import me.jmix.brothertakeaway.dto.ShoppingCartDTO;
 import me.jmix.brothertakeaway.entity.OrderDetail;
 import me.jmix.brothertakeaway.entity.OrderMaster;
 import me.jmix.brothertakeaway.entity.ProductInfo;
+import me.jmix.brothertakeaway.enums.OrderMasterStateEnum;
 import me.jmix.brothertakeaway.enums.OrderServiceStateEnum;
+import me.jmix.brothertakeaway.enums.PayStateEnum;
 import me.jmix.brothertakeaway.exception.OrderServiceException;
 import me.jmix.brothertakeaway.service.OrderService;
 import me.jmix.brothertakeaway.service.ProductService;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -37,7 +40,8 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public OrderDTO CreateOrder(OrderDTO orderDTO) {
+    @Transactional
+    public OrderDTO createOrder(OrderDTO orderDTO) {
         // 在创建订单的最开始，生成此订单的Id
         String orderId = KeyUtil.getUniqueKey();
         BigDecimal orderAmount = new BigDecimal(0);
@@ -60,17 +64,20 @@ public class OrderServiceImpl implements OrderService {
 
         // 3. 写入订单数据库（orderMaster和orderDetail）
         OrderMaster orderMaster = new OrderMaster();
+        BeanUtils.copyProperties(orderDTO, orderMaster);    // 此步不可更换位置，否则会导致BeanUtils.copyProperties把空属性（orderId, orderAmount）拷贝进orderDetail中
         orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderAmount);
-        BeanUtils.copyProperties(orderDTO, orderMaster);
+        orderMaster.setOrderStatus(OrderMasterStateEnum.NEW.getStateCode());
+        orderMaster.setPayStatus(PayStateEnum.WAIT.getStateCode());
         orderMasterRepository.save(orderMaster);
 
         // 4. 减库存
         // 需要再加入增减库存方法
         List<ShoppingCartDTO> shoppingCartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
                 new ShoppingCartDTO(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
+        productService.decreaseStock(shoppingCartDTOList);
 
-        return null;
+        return orderDTO;
     }
 
     /**

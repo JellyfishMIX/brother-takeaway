@@ -44,11 +44,31 @@ public class ProductServiceImpl implements ProductService {
         return productInfoResult;
     }
 
+    /**
+     * 增加库存
+     * @param shoppingCartDTOList
+     */
     @Override
     public void increaseStock(List<ShoppingCartDTO> shoppingCartDTOList) {
+        for (ShoppingCartDTO shoppingCartDTO : shoppingCartDTOList) {
+            ProductInfo productInfo = productInfoRepository.findById(shoppingCartDTO.getProductId()).orElse(null);
+            if (productInfo == null) {
+                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_NOT_EXIT);
+            }
 
+            Integer stockResult = productInfo.getProductStock() + shoppingCartDTO.getProductQuantity();
+            if (stockResult < 0) {
+                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(stockResult);
+            productInfoRepository.save(productInfo);
+        }
     }
 
+    /**
+     * 减少库存
+     * @param shoppingCartDTOList
+     */
     @Override
     @Transactional
     public void decreaseStock(List<ShoppingCartDTO> shoppingCartDTOList) {
@@ -58,11 +78,11 @@ public class ProductServiceImpl implements ProductService {
                 throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_NOT_EXIT);
             }
 
-            Integer result = productInfo.getProductStock() - shoppingCartDTO.getProductQuantity();
-            if (result < 0) {
+            Integer stockResult = productInfo.getProductStock() - shoppingCartDTO.getProductQuantity();
+            if (stockResult < 0) {
                 throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_STOCK_ERROR);
             }
-            productInfo.setProductStock(result);
+            productInfo.setProductStock(stockResult);
             productInfoRepository.save(productInfo);
         }
     }
