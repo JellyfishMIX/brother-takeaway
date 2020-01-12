@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum  ProductServiceStateEnum {
-    PRODUCT_NOT_EXIT(-1001, "商品不存在"),
+    PRODUCT_NOT_EXIST(-1001, "商品不存在"),
     PRODUCT_STOCK_ERROR(-1002, "商品库存错误");
 
     private Integer stateCode;

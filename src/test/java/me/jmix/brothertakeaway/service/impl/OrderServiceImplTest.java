@@ -23,6 +23,7 @@ class OrderServiceImplTest {
     private OrderServiceImpl orderService;
 
     private final String CUSTOMER_OPENID = "101010";
+    private final String ORDER_ID = "1578751170026180631";
 
     @Test
     @Disabled
@@ -58,6 +59,9 @@ class OrderServiceImplTest {
     @Test
     @Disabled
     void getOrderByOrderId() {
+        OrderDTO orderDTOResult = orderService.getOrderByOrderId(ORDER_ID);
+        log.info("[查询单个订单]result = {}", orderDTOResult);
+        assertEquals(ORDER_ID, orderDTOResult.getOrderId());
     }
 
     @Test

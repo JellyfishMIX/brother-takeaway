@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         for (ShoppingCartDTO shoppingCartDTO : shoppingCartDTOList) {
             ProductInfo productInfo = productInfoRepository.findById(shoppingCartDTO.getProductId()).orElse(null);
             if (productInfo == null) {
-                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_NOT_EXIT);
+                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_NOT_EXIST);
             }
 
             Integer stockResult = productInfo.getProductStock() + shoppingCartDTO.getProductQuantity();
@@ -75,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
         for (ShoppingCartDTO shoppingCartDTO : shoppingCartDTOList) {
             ProductInfo productInfo = productInfoRepository.findById(shoppingCartDTO.getProductId()).orElse(null);
             if (productInfo == null) {
-                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_NOT_EXIT);
+                throw new ProductServiceException(ProductServiceStateEnum.PRODUCT_NOT_EXIST);
             }
 
             Integer stockResult = productInfo.getProductStock() - shoppingCartDTO.getProductQuantity();

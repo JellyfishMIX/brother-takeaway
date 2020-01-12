@@ -50,7 +50,7 @@ public class OrderServiceImpl implements OrderService {
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
             ProductInfo productInfo = productService.getProductInfoByProductId(orderDetail.getProductId());
             if (productInfo == null) {
-                throw new OrderServiceException((OrderServiceStateEnum.PRODUCT_NOT_EXIT));
+                throw new OrderServiceException((OrderServiceStateEnum.PRODUCT_NOT_EXIST));
             }
             // 2. 计算总价
             orderAmount = productInfo.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity())).add(orderAmount);
@@ -87,7 +87,20 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public OrderDTO getOrderByOrderId(String orderId) {
-        return null;
+        OrderMaster orderMaster = orderMasterRepository.findById(orderId).orElse(null);
+        if (orderMaster == null) {
+            throw new OrderServiceException(OrderServiceStateEnum.ORDER_MASTER_NOT_EXIST);
+        }
+
+        List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
+        if (orderDetailList == null) {
+            throw new OrderServiceException(OrderServiceStateEnum.ORDER_DETAIL_NOT_EXIST);
+        }
+
+        OrderDTO orderDTO = new OrderDTO();
+        BeanUtils.copyProperties(orderMaster, orderDTO);
+        orderDTO.setOrderDetailList(orderDetailList);
+        return orderDTO;
     }
 
     /**
