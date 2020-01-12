@@ -1,5 +1,6 @@
 package me.jmix.brothertakeaway.service.impl;
 
+import me.jmix.brothertakeaway.converter.OrderMasterToOrderDTOConverter;
 import me.jmix.brothertakeaway.dao.OrderDetailRepository;
 import me.jmix.brothertakeaway.dao.OrderMasterRepository;
 import me.jmix.brothertakeaway.dto.OrderDTO;
@@ -17,6 +18,7 @@ import me.jmix.brothertakeaway.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -111,7 +113,20 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Page<OrderDTO> getOrderByCustomerOpenid(String customerOpenId, Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByCustomerOpenid(customerOpenId, pageable);
+
+        // 把查询出来的Page<OrderMaster>转换为Page<OrderDTO>
+        List<OrderDTO> orderDTOList = OrderMasterToOrderDTOConverter.convert(orderMasterPage.getContent());
+        for (OrderDTO orderDTO : orderDTOList) {
+            List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderDTO.getOrderId());
+            if (orderDetailList == null) {
+                throw new OrderServiceException(OrderServiceStateEnum.ORDER_DETAIL_NOT_EXIST);
+            }
+            orderDTO.setOrderDetailList(orderDetailList);
+        }
+
+        Page<OrderDTO> orderDTOPage = new PageImpl<>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+        return orderDTOPage;
     }
 
     /**

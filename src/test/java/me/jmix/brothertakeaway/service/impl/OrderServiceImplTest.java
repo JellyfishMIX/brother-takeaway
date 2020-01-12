@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -67,6 +69,9 @@ class OrderServiceImplTest {
     @Test
     @Disabled
     void getOrderByCustomerOpenid() {
+        PageRequest pageRequest = PageRequest.of(0, 2);
+        Page<OrderDTO> orderDTOPage = orderService.getOrderByCustomerOpenid(CUSTOMER_OPENID, pageRequest);
+        assertNotNull(orderDTOPage);
     }
 
     @Test
