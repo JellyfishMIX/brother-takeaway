@@ -26,6 +26,7 @@ class OrderServiceImplTest {
 
     private final String CUSTOMER_OPENID = "101010";
     private final String ORDER_ID = "1578751170026180631";
+    private final String ORDER_ID2 = "1578748351816444203";
 
     @Test
     @Disabled
@@ -85,6 +86,9 @@ class OrderServiceImplTest {
     @Test
     @Disabled
     void finishOrder() {
+        OrderDTO orderDTO = orderService.getOrderByOrderId(ORDER_ID2);
+        OrderDTO orderDTOResult = orderService.finishOrder(orderDTO);
+        assertEquals(ORDER_ID2, orderDTOResult.getOrderId());
     }
 
     @Test

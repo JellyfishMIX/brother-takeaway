@@ -152,7 +152,7 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orderDTO, orderMaster);
         OrderMaster orderMasterUpdateResult = orderMasterRepository.save(orderMaster);
         if (orderMasterUpdateResult == null) {
-            log.info("[取消订单]，更新失败，orderMaster = {}", orderMaster);
+            log.info("[取消订单]，订单状态更新失败，orderMaster = {}", orderMaster);
             throw new OrderServiceException(OrderServiceStateEnum.ORDER_STATUS_UPDATE_FAILED);
         }
 
@@ -180,7 +180,23 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public OrderDTO finishOrder(OrderDTO orderDTO) {
-        return null;
+        // 判断订单状态
+        if (!orderDTO.getPayStatus().equals(OrderMasterStateEnum.NEW.getStateCode())) {
+            log.info("[完结订单]订单状态不正确, orderId = {}, orderStatus = {}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
+            throw new OrderServiceException(OrderServiceStateEnum.ORDER_STATUS_ERROR);
+        }
+
+        // 修改状态
+        OrderMaster orderMaster = new OrderMaster();
+        orderDTO.setOrderStatus(OrderMasterStateEnum.FINISHED.getStateCode());
+        BeanUtils.copyProperties(orderDTO, orderMaster);
+        OrderMaster orderMasterResult = orderMasterRepository.save(orderMaster);
+        if (orderMasterResult == null) {
+            log.info("[完结订单]，订单状态更新失败，orderId = {}, orderStatus = {}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
+            throw new OrderServiceException(OrderServiceStateEnum.ORDER_STATUS_UPDATE_FAILED);
+        }
+
+        return orderDTO;
     }
 
     /**
