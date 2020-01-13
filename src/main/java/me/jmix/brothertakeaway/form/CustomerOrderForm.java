@@ -10,25 +10,25 @@ public class CustomerOrderForm {
      * 买家姓名
      */
     @NotEmpty(message = "顾客姓名必填")
-    private String customerName;
+    private String name;
 
     /**
      * 买家手机号
      */
     @NotEmpty(message = "顾客手机号")
-    private String customerPhone;
+    private String phone;
 
     /**
      * 顾客地址
      */
     @NotEmpty(message = "顾客地址必填")
-    private String customerAddress;
+    private String address;
 
     /**
      * 顾客微信openid
      */
     @NotEmpty(message = "顾客微信openid必填")
-    private String customerOpenid;
+    private String openid;
 
     /**
      * 购物车

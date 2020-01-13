@@ -10,7 +10,7 @@ public class OrderServiceException extends RuntimeException {
     private Integer stateCode;
 
     public OrderServiceException(OrderServiceStateEnum orderServiceStateEnum) {
-        super(orderServiceStateEnum.getMessage());
+        super(orderServiceStateEnum.getStateInfo());
         this.stateCode = orderServiceStateEnum.getStateCode();
     }
 }

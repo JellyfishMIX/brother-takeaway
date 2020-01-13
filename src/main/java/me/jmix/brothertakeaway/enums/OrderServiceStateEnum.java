@@ -14,10 +14,10 @@ public enum OrderServiceStateEnum {
     ORDER_PAY_STATUS_UPDATE_FAILED(-1008, "订单支付状态更新失败");
 
     private Integer stateCode;
-    private String message;
+    private String stateInfo;
 
-    OrderServiceStateEnum(Integer stateCode, String message) {
+    OrderServiceStateEnum(Integer stateCode, String stateInfo) {
         this.stateCode = stateCode;
-        this.message = message;
+        this.stateInfo = stateInfo;
     }
 }

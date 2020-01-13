@@ -10,7 +10,7 @@ public class ProductServiceException extends RuntimeException {
     private Integer stateCode;
 
     public ProductServiceException(ProductServiceStateEnum productServiceStateEnum) {
-        super(productServiceStateEnum.getMessage());
+        super(productServiceStateEnum.getStateInfo());
         this.stateCode = productServiceStateEnum.getStateCode();
     }
 }
