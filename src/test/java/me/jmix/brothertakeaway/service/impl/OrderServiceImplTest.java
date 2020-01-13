@@ -3,6 +3,8 @@ package me.jmix.brothertakeaway.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import me.jmix.brothertakeaway.dto.OrderDTO;
 import me.jmix.brothertakeaway.entity.OrderDetail;
+import me.jmix.brothertakeaway.enums.OrderMasterStateEnum;
+import me.jmix.brothertakeaway.enums.PayStateEnum;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +28,8 @@ class OrderServiceImplTest {
 
     private final String CUSTOMER_OPENID = "101010";
     private final String ORDER_ID = "1578751170026180631";
-    private final String ORDER_ID2 = "1578748351816444203";
+    private final String ORDER_ID_FINISH_ORDER = "1578748351816444203";
+    private final String ORDER_PAY_ORDER = "123457";
 
     @Test
     @Disabled
@@ -80,19 +83,22 @@ class OrderServiceImplTest {
     void cancelOrder() {
         OrderDTO orderDTO = orderService.getOrderByOrderId(ORDER_ID);
         OrderDTO orderDTOResult = orderService.cancelOrder(orderDTO);
-        assertEquals(ORDER_ID, orderDTOResult.getOrderId());
+        assertEquals(OrderMasterStateEnum.CANCEL.getStateCode(), orderDTOResult.getOrderStatus());
     }
 
     @Test
     @Disabled
     void finishOrder() {
-        OrderDTO orderDTO = orderService.getOrderByOrderId(ORDER_ID2);
+        OrderDTO orderDTO = orderService.getOrderByOrderId(ORDER_ID_FINISH_ORDER);
         OrderDTO orderDTOResult = orderService.finishOrder(orderDTO);
-        assertEquals(ORDER_ID2, orderDTOResult.getOrderId());
+        assertEquals(OrderMasterStateEnum.FINISHED.getStateCode(), orderDTOResult.getOrderStatus());
     }
 
     @Test
     @Disabled
     void payOrder() {
+        OrderDTO orderDTO = orderService.getOrderByOrderId(ORDER_PAY_ORDER);
+        OrderDTO orderDTOResult = orderService.payOrder(orderDTO);
+        assertEquals(PayStateEnum.SUCCESS.getStateCode(), orderDTOResult.getPayStatus());
     }
 }
