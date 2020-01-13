@@ -77,6 +77,9 @@ class OrderServiceImplTest {
     @Test
     @Disabled
     void cancelOrder() {
+        OrderDTO orderDTO = orderService.getOrderByOrderId(ORDER_ID);
+        OrderDTO orderDTOResult = orderService.cancelOrder(orderDTO);
+        assertEquals(ORDER_ID, orderDTOResult.getOrderId());
     }
 
     @Test
