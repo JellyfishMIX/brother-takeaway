@@ -7,6 +7,7 @@ import me.jmix.brothertakeaway.enums.CustomerOrderControllerStateEnum;
 import me.jmix.brothertakeaway.exception.CustomerOrderControllerException;
 import me.jmix.brothertakeaway.form.CustomerOrderForm;
 import me.jmix.brothertakeaway.service.OrderService;
+import me.jmix.brothertakeaway.utils.ResultVOUtil;
 import me.jmix.brothertakeaway.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -42,12 +43,13 @@ public class CustomerOrderController {
         Map<String, String> map = new HashMap<>();
         map.put("orderId", orderDTOResult.getOrderId());
 
-        ResultVO resultVO = new ResultVO();
-        resultVO.setStateCode(0);
-        resultVO.setStateInfo("创建订单成功");
-        resultVO.setData(map);
+        // ResultVO resultVO = new ResultVO();
+        // resultVO.setStateCode(0);
+        // resultVO.setStateInfo("创建订单成功");
+        // resultVO.setData(map);
 
-        return resultVO;
+
+        return ResultVOUtil.success("创建订单成功", map);
     }
 
     // 订单列表
