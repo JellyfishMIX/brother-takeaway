@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/api/customer/order")
 @Slf4j
 public class CustomerOrderController {
-    // // 创建订单
+    // 创建订单
     // public ResultVO<Map<String, String>> createOrder(@Valid CustomerOrderForm customerOrderForm, BindingResult bindingResult) {
     //     if (bindingResult.hasErrors()) {
     //         log.error("[创建订单]参数不正确，customerOrderForm = {}", customerOrderForm);
