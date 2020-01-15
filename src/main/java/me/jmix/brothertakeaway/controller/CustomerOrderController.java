@@ -80,7 +80,19 @@ public class CustomerOrderController {
         return ResultVOUtil.success("查询订单列表成功", orderDTOPage.getContent());
     }
 
-    // 订单详情
+    /**
+     * 订单详情
+     * @param openid
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/getorderbyorderid")
+    public ResultVO<OrderDTO> getOrderByOrderId(@RequestParam("openid") String openid,
+                                                @RequestParam("orderId") String orderId) {
+        // TODO 需要校验openid是否越权，一个用户不能查询别人的订单
+        OrderDTO orderDTO = orderService.getOrderByOrderId(orderId);
+        return ResultVOUtil.success("查询成功", orderDTO);
+    }
 
     // 取消订单
 }
