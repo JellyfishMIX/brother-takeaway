@@ -29,7 +29,12 @@ public class CustomerOrderController {
     @Autowired
     private OrderService orderService;
 
-    // 创建订单
+    /**
+     * 创建订单
+     * @param customerOrderForm
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/createorder")
     public ResultVO<Map<String, String>> createOrder(@Valid CustomerOrderForm customerOrderForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

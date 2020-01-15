@@ -20,24 +20,43 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductInfoRepository productInfoRepository;
 
+    /**
+     * 通过productId获取对应的productInfo
+     * @param productId
+     * @return
+     */
     @Override
     public ProductInfo getProductInfoByProductId(String productId) {
         ProductInfo productInfo = productInfoRepository.findById(productId).orElse(null);
         return productInfo;
     }
 
+    /**
+     * 获取上架的商品信息列表
+     * @return
+     */
     @Override
     public List<ProductInfo> getShelvesProductInfo() {
         List<ProductInfo> productInfoList = productInfoRepository.findByProductStatus(ProductStateEnum.SHELVES.getStateCode());
         return productInfoList;
     }
 
+    /**
+     * 获取所有商品信息列表
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<ProductInfo> getAllProductInfo(Pageable pageable) {
         Page<ProductInfo> productInfoPage = productInfoRepository.findAll(pageable);
         return productInfoPage;
     }
 
+    /**
+     * 新增一个产品
+     * @param productInfo
+     * @return
+     */
     @Override
     public ProductInfo addProduct(ProductInfo productInfo) {
         ProductInfo productInfoResult = productInfoRepository.save(productInfo);

@@ -26,6 +26,10 @@ public class CustomerProductController {
     @Autowired
     private ProductCategoryService productCategoryService;
 
+    /**
+     * 获取商品列表
+     * @return
+     */
     @GetMapping("/getproductlist")
     public ResultVO getProductList() {
         // 1. 查询所有上架商品
