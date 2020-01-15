@@ -7,12 +7,13 @@ import me.jmix.brothertakeaway.entity.OrderDetail;
 import me.jmix.brothertakeaway.utils.serializer.DateToLongSerializer;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
 // @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-@JsonInclude(JsonInclude.Include.NON_NULL)
+// @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
     // 订单Id
     private String orderId;
@@ -39,7 +40,7 @@ public class OrderDTO {
     private Integer payStatus;
 
     // 订单详情商品列表
-    private List<OrderDetail> orderDetailList;
+    private List<OrderDetail> orderDetailList = new ArrayList<>();
 
     // 创建时间
     // @JsonSerialize(using = DateToLongSerializer.class)
