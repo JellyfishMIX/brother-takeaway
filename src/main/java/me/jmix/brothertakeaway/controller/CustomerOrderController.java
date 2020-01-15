@@ -94,5 +94,18 @@ public class CustomerOrderController {
         return ResultVOUtil.success("查询成功", orderDTO);
     }
 
-    // 取消订单
+    /**
+     * 取消订单
+     * @param openid
+     * @param orderId
+     * @return
+     */
+    @PostMapping("cancelorderbyorderid")
+    public ResultVO cancelOrderByOrderId(@RequestParam("openid") String openid,
+                                         @RequestParam("orderId") String orderId) {
+        // TODO 需要校验openid是否越权，一个用户不能取消别人的订单
+        OrderDTO orderDTO = orderService.getOrderByOrderId(orderId);
+        orderService.cancelOrder(orderDTO);
+        return ResultVOUtil.success();
+    }
 }
