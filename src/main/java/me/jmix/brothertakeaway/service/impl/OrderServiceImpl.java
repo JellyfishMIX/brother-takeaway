@@ -110,13 +110,13 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 查询订单列表
-     * @param customerOpenId
+     * @param customerOpenid
      * @param pageable
      * @return
      */
     @Override
-    public Page<OrderDTO> getOrderByCustomerOpenid(String customerOpenId, Pageable pageable) {
-        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByCustomerOpenid(customerOpenId, pageable);
+    public Page<OrderDTO> getOrderListByCustomerOpenid(String customerOpenid, Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByCustomerOpenid(customerOpenid, pageable);
 
         // 把查询出来的Page<OrderMaster>转换为Page<OrderDTO>
         List<OrderDTO> orderDTOList = OrderMasterToOrderDTOConverter.convert(orderMasterPage.getContent());

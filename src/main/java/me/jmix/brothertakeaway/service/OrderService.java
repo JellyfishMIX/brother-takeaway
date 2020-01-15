@@ -24,7 +24,7 @@ public interface OrderService {
      * @param pageable
      * @return
      */
-    Page<OrderDTO> getOrderByCustomerOpenid(String customerOpenid, Pageable pageable);
+    Page<OrderDTO> getOrderListByCustomerOpenid(String customerOpenid, Pageable pageable);
 
     /**
      * 取消订单

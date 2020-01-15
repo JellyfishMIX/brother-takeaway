@@ -10,13 +10,16 @@ import me.jmix.brothertakeaway.service.OrderService;
 import me.jmix.brothertakeaway.utils.ResultVOUtil;
 import me.jmix.brothertakeaway.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,6 +30,7 @@ public class CustomerOrderController {
     private OrderService orderService;
 
     // 创建订单
+    @PostMapping("/createorder")
     public ResultVO<Map<String, String>> createOrder(@Valid CustomerOrderForm customerOrderForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("[创建订单]参数不正确，customerOrderForm = {}", customerOrderForm);
@@ -52,7 +56,24 @@ public class CustomerOrderController {
         return ResultVOUtil.success("创建订单成功", map);
     }
 
-    // 订单列表
+    /**
+     * 查询订单列表，分页查询
+     * @return
+     */
+    @GetMapping("/getorderlistbyopenid")
+    public ResultVO<List<OrderDTO>> getOrderListByCustomerOpenid(@RequestParam("openid") String customerOpenid,
+                                              @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        if (StringUtils.isEmpty(customerOpenid)) {
+            log.error("[查询订单列表]customerOpenid为空");
+            throw new CustomerOrderControllerException(CustomerOrderControllerStateEnum.FORM_PARAM_ERROR);
+        }
+
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        Page<OrderDTO> orderDTOPage = orderService.getOrderListByCustomerOpenid(customerOpenid, pageRequest);
+
+        return ResultVOUtil.success("查询订单列表成功", orderDTOPage.getContent());
+    }
 
     // 订单详情
 

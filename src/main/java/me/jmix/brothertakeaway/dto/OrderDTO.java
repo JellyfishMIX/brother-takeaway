@@ -1,7 +1,9 @@
 package me.jmix.brothertakeaway.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import me.jmix.brothertakeaway.entity.OrderDetail;
+import me.jmix.brothertakeaway.utils.serializer.DateToLongSerializer;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -37,8 +39,10 @@ public class OrderDTO {
     private List<OrderDetail> orderDetailList;
 
     // 创建时间
+    // @JsonSerialize(using = DateToLongSerializer.class)
     private Date createTime;
 
     // 修改时间
+    // @JsonSerialize(using = DateToLongSerializer.class)
     private Date updateTime;
 }

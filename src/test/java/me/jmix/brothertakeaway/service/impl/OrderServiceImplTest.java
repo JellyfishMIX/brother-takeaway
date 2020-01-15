@@ -74,7 +74,7 @@ class OrderServiceImplTest {
     @Disabled
     void getOrderByCustomerOpenid() {
         PageRequest pageRequest = PageRequest.of(0, 2);
-        Page<OrderDTO> orderDTOPage = orderService.getOrderByCustomerOpenid(CUSTOMER_OPENID, pageRequest);
+        Page<OrderDTO> orderDTOPage = orderService.getOrderListByCustomerOpenid(CUSTOMER_OPENID, pageRequest);
         assertNotNull(orderDTOPage);
     }
 
