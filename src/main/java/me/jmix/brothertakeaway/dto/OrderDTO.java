@@ -1,5 +1,6 @@
 package me.jmix.brothertakeaway.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import me.jmix.brothertakeaway.entity.OrderDetail;
@@ -10,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+// @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
     // 订单Id
     private String orderId;
