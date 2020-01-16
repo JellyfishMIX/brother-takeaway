@@ -89,9 +89,10 @@ public class CustomerOrderController {
     @GetMapping("/getorderbyorderid")
     public ResultVO<OrderDTO> getOrderByOrderId(@RequestParam("openid") String openid,
                                                 @RequestParam("orderId") String orderId) {
-        // TODO 需要校验openid是否越权，一个用户不能查询别人的订单
+        // 校验openid是否越权，一个用户不能查询别人的订单
         OrderDTO orderDTO = orderService.getOrderByOrderId(orderId);
-        return ResultVOUtil.success("查询成功", orderDTO);
+        OrderDTO orderDTOChecked = checkCustomerOpenid(openid, orderDTO);
+        return ResultVOUtil.success("查询成功", orderDTOChecked);
     }
 
     /**
@@ -100,12 +101,27 @@ public class CustomerOrderController {
      * @param orderId
      * @return
      */
-    @PostMapping("cancelorderbyorderid")
+    @PostMapping("/cancelorderbyorderid")
     public ResultVO cancelOrderByOrderId(@RequestParam("openid") String openid,
                                          @RequestParam("orderId") String orderId) {
-        // TODO 需要校验openid是否越权，一个用户不能取消别人的订单
+        // 校验openid是否越权，一个用户不能取消别人的订单
         OrderDTO orderDTO = orderService.getOrderByOrderId(orderId);
-        orderService.cancelOrder(orderDTO);
+        OrderDTO orderDTOChecked = checkCustomerOpenid(openid, orderDTO);
+        orderService.cancelOrder(orderDTOChecked);
         return ResultVOUtil.success();
+    }
+
+    /**
+     * 校验customerOpenid是否越权
+     * @param customerOpenid
+     * @param orderDTO
+     * @return
+     */
+    private OrderDTO checkCustomerOpenid(String customerOpenid, OrderDTO orderDTO) {
+        if (!orderDTO.getCustomerOpenid().equals(customerOpenid)) {
+            log.error("[查询订单]订单的openid不一致。 openid = {}，orderDTO = {}", customerOpenid, orderDTO);
+            throw new CustomerOrderControllerException(CustomerOrderControllerStateEnum.CUSTOMER_OPENID_INCONSISTENT);
+        }
+        return orderDTO;
     }
 }
