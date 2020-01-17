@@ -22,7 +22,7 @@ create table `tb_product_category` (
     unique key `unique_category_type` (category_type)
 ) comment '商品类目表';
 
-create table `order_master` (
+create table `tb_order_master` (
     `order_id` varchar(32) not null ,
     `customer_name` varchar(32) not null comment '顾客名字',
     `customer_phone` varchar(32) not null comment '顾客电话',
@@ -37,7 +37,7 @@ create table `order_master` (
     key `index_customer_openid` (`customer_openid`)
 ) comment '订单表';
 
-create table `order_detail` (
+create table `tb_order_detail` (
     `detail_id` varchar(32) not null ,
     `order_id` varchar(32) not null ,
     `product_id` varchar(32) not null ,

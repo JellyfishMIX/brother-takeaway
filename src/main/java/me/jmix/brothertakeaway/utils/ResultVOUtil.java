@@ -2,8 +2,6 @@ package me.jmix.brothertakeaway.utils;
 
 import me.jmix.brothertakeaway.vo.ResultVO;
 
-import java.util.Map;
-
 public class ResultVOUtil {
     public static ResultVO success() {
         ResultVO resultVO = new ResultVO();
