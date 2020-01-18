@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/customer/order")
+@RequestMapping("/buyer/order")
 @Slf4j
 public class CustomerOrderController {
     @Autowired
@@ -35,7 +35,8 @@ public class CustomerOrderController {
      * @param bindingResult
      * @return
      */
-    @PostMapping("/createorder")
+    // @PostMapping("/createorder")
+    @PostMapping("/create")
     public ResultVO<Map<String, String>> createOrder(@Valid CustomerOrderForm customerOrderForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.error("[创建订单]参数不正确，customerOrderForm = {}", customerOrderForm);
@@ -65,7 +66,8 @@ public class CustomerOrderController {
      * 查询订单列表，分页查询
      * @return
      */
-    @GetMapping("/getorderlistbyopenid")
+    // @GetMapping("/getorderlistbyopenid")
+    @GetMapping("/list")
     public ResultVO<List<OrderDTO>> getOrderListByCustomerOpenid(@RequestParam("openid") String customerOpenid,
                                               @RequestParam(value = "page", defaultValue = "0") Integer page,
                                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
@@ -86,7 +88,8 @@ public class CustomerOrderController {
      * @param orderId
      * @return
      */
-    @GetMapping("/getorderbyorderid")
+    // @GetMapping("/getorderbyorderid")
+    @GetMapping("/detail")
     public ResultVO<OrderDTO> getOrderByOrderId(@RequestParam("openid") String openid,
                                                 @RequestParam("orderId") String orderId) {
         // 校验openid是否越权，一个用户不能查询别人的订单
@@ -101,7 +104,8 @@ public class CustomerOrderController {
      * @param orderId
      * @return
      */
-    @PostMapping("/cancelorderbyorderid")
+    // @PostMapping("/cancelorderbyorderid")
+    @PostMapping("/cancel")
     public ResultVO cancelOrderByOrderId(@RequestParam("openid") String openid,
                                          @RequestParam("orderId") String orderId) {
         // 校验openid是否越权，一个用户不能取消别人的订单

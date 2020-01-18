@@ -7,12 +7,12 @@ import java.util.List;
 
 @Data
 public class ProductCategoryVO {
-    @JsonProperty("type")
-    private Integer categoryType;
-
     @JsonProperty("name")
     private String categoryName;
 
-    @JsonProperty("foodList")
+    @JsonProperty("type")
+    private Integer categoryType;
+
+    @JsonProperty("foods")
     private List<ProductInfoVO> productInfoVOList;
 }

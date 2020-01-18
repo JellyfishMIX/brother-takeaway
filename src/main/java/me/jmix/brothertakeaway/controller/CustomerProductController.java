@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/customer/product")
+@RequestMapping("/buyer/product")
 public class CustomerProductController {
     @Autowired
     private ProductService productService;
@@ -30,7 +29,8 @@ public class CustomerProductController {
      * 获取商品列表
      * @return
      */
-    @GetMapping("/getproductlist")
+    // @GetMapping("/getproductlist")
+    @GetMapping("/list")
     public ResultVO getProductList() {
         // 1. 查询所有上架商品
         List<ProductInfo> productInfoList = productService.getShelvesProductInfo();
@@ -70,8 +70,8 @@ public class CustomerProductController {
 
         ResultVO resultVO = new ResultVO();
         resultVO.setData(productCategoryVOList);
-        resultVO.setStateCode(0);
-        resultVO.setStateInfo("查询成功");
+        resultVO.setCode(0);
+        resultVO.setMsg("查询成功");
 
         return resultVO;
     }
