@@ -9,4 +9,4 @@ jdk@11.0.4
 
 ### Dependency
 
-junit@5
+junit@5.5.2
