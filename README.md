@@ -10,3 +10,7 @@ jdk@11.0.4
 ### Dependency
 
 junit@5.5.2
+
+### Database
+
+mysql@8.0.17
