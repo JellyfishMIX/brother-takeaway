@@ -14,3 +14,7 @@ junit@5.5.2
 ### Database
 
 mysql@8.0.17
+
+### Server
+
+VirtualBox@6.1--CentOS@7.3
