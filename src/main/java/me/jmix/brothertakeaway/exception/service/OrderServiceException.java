@@ -1,7 +1,7 @@
-package me.jmix.brothertakeaway.exception;
+package me.jmix.brothertakeaway.exception.service;
 
 import lombok.Getter;
-import me.jmix.brothertakeaway.enums.OrderServiceStateEnum;
+import me.jmix.brothertakeaway.enums.service.OrderServiceStateEnum;
 
 @Getter
 public class OrderServiceException extends RuntimeException {

@@ -1,6 +1,6 @@
-package me.jmix.brothertakeaway.exception;
+package me.jmix.brothertakeaway.exception.controller;
 
-import me.jmix.brothertakeaway.enums.CustomerOrderControllerStateEnum;
+import me.jmix.brothertakeaway.enums.controller.CustomerOrderControllerStateEnum;
 
 public class CustomerOrderControllerException extends RuntimeException {
     private static final long serialVersionUID = 7041929752847179080L;

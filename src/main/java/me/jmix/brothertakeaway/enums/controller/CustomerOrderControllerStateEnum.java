@@ -1,4 +1,4 @@
-package me.jmix.brothertakeaway.enums;
+package me.jmix.brothertakeaway.enums.controller;
 
 import lombok.Getter;
 
