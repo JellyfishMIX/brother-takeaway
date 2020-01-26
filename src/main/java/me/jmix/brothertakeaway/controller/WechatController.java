@@ -18,7 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-@RestController
+@Controller
 @RequestMapping("/wechat")
 @Slf4j
 public class WechatController {
@@ -31,7 +31,7 @@ public class WechatController {
         // 2.调用方法
         String url = "http://sellx.nat300.top/sell/wechat/userinfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl, StandardCharsets.UTF_8.toString()));
-        return redirectUrl;
+        return "redirect:" + redirectUrl;
     }
 
     @GetMapping("/userinfo")
