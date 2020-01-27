@@ -11,6 +11,8 @@ jdk@11.0.4
 
 junit@5.5.2
 
+weixin-java-mp@2.9.0
+
 ### Database
 
 mysql@8.0.17
