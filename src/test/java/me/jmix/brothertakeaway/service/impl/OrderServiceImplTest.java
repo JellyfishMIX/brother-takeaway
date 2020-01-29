@@ -80,6 +80,15 @@ class OrderServiceImplTest {
 
     @Test
     @Disabled
+    void getAllOrderList() {
+        PageRequest pageRequest = PageRequest.of(0, 2);
+        Page<OrderDTO> orderDTOPage = orderService.getAllOrderList(pageRequest);
+        // assertNotEquals(0, orderDTOPage.getTotalElements());
+        assertTrue(orderDTOPage.getTotalElements() > 0, "查询所有的订单列表");
+    }
+
+    @Test
+    @Disabled
     void cancelOrder() {
         OrderDTO orderDTO = orderService.getOrderByOrderId(ORDER_ID);
         OrderDTO orderDTOResult = orderService.cancelOrder(orderDTO);

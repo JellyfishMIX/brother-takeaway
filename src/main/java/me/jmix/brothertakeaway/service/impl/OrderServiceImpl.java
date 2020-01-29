@@ -133,6 +133,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * 获取全部订单列表
+     * @param pageable
+     * @return
+     */
+    @Override
+    public Page<OrderDTO> getAllOrderList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        List<OrderDTO> orderDTOList = OrderMasterToOrderDTOConverter.convert((orderMasterPage.getContent()));
+        return new PageImpl<OrderDTO>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+    }
+
+    /**
      * 取消订单
      * @param orderDTO
      * @return

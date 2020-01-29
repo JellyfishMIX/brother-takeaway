@@ -19,12 +19,19 @@ public interface OrderService {
     OrderDTO getOrderByOrderId(String orderId);
 
     /**
-     * 查询订单列表
+     * 通过customerOpenid查询订单列表
      * @param customerOpenid
      * @param pageable
      * @return
      */
     Page<OrderDTO> getOrderListByCustomerOpenid(String customerOpenid, Pageable pageable);
+
+    /**
+     * 查询全部订单列表
+     * @param pageable
+     * @return
+     */
+    Page<OrderDTO> getAllOrderList(Pageable pageable);
 
     /**
      * 取消订单
