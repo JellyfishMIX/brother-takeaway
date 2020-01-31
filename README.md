@@ -13,6 +13,8 @@ junit@5.5.2
 
 weixin-java-mp@2.9.0
 
+best-pay-sdk@1.3.0
+
 ### Database
 
 mysql@8.0.17
