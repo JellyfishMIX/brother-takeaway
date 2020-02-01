@@ -15,6 +15,8 @@ weixin-java-mp@2.9.0
 
 best-pay-sdk@1.3.0
 
+freemarker@2.3.28
+
 ### Database
 
 mysql@8.0.17
