@@ -22,11 +22,11 @@ public class SellerOrderController {
 
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                             @RequestParam(value = "size", defaultValue = "10") Integer size) {
-        Map<String, Object> map = new HashMap<>();
+                             @RequestParam(value = "size", defaultValue = "10") Integer size,
+                             Map<String, Object> map) {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         Page<OrderDTO> orderDTOPage = orderService.getAllOrderList(pageRequest);
         map.put("orderDTOPage", orderDTOPage);
-        return new ModelAndView("order/list.ftl", map);
+        return new ModelAndView("order/list", map);
     }
 }
