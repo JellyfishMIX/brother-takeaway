@@ -1,9 +1,14 @@
 package me.jmix.brothertakeaway.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.lly835.bestpay.enums.OrderStatusEnum;
 import lombok.Data;
 import me.jmix.brothertakeaway.entity.OrderDetail;
+import me.jmix.brothertakeaway.enums.OrderMasterStateEnum;
+import me.jmix.brothertakeaway.enums.PayStateEnum;
+import me.jmix.brothertakeaway.utils.EnumUtil;
 import me.jmix.brothertakeaway.utils.serializer.DateToLongSerializer;
 
 import java.math.BigDecimal;
@@ -49,4 +54,14 @@ public class OrderDTO {
     // 修改时间
     // @JsonSerialize(using = DateToLongSerializer.class)
     private Date updateTime;
+
+    @JsonIgnore
+    public OrderMasterStateEnum getOrderMasterStateEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderMasterStateEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStateEnum getPayStateEnum() {
+        return EnumUtil.getByCode(payStatus, PayStateEnum.class);
+    }
 }
