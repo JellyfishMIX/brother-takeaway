@@ -26,7 +26,11 @@ public class SellerOrderController {
         Map<String, Object> map = new HashMap<>();
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         Page<OrderDTO> orderDTOPage = orderService.getAllOrderList(pageRequest);
+
         map.put("orderDTOPage", orderDTOPage);
+        map.put("currentPage", page);
+        map.put("size", size);
+
         ModelAndView modelAndView = new ModelAndView("order/list", map);
         return modelAndView;
     }
