@@ -49,10 +49,32 @@
                             <li><a href="/sell/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
                         </#if>
                         <#list 1..orderDTOPage.getTotalPages() as index>
-                            <#if currentPage == index>
-                                <li class="disabled"><a href="#">${index}</a></li>
+                            <#if orderDTOPage.getTotalPages() gte 12>
+                                <#if index == 1>
+                                    <li><a href="/sell/seller/order/list?page=${index}&size=10">${index}</a></li>
+                                <#elseif index == orderDTOPage.getTotalPages()>
+                                    <li><a href="/sell/seller/order/list?page=${index}&size=10">${index}</a></li>
+                                <#elseif index lt ${currentPage - 5}>
+
+                                <#elseif index == ${currentPage - 5}>
+                                    <li class="disabled"><a href="#">...</a></li>
+                                <#elseif index == ${currentPage + 5}>
+                                    <li class="disabled"><a href="#">...</a></li>
+                                <#elseif index gt #{currentPage + 5}>
+
+                                <#else>
+                                    <#if currentPage == index>
+                                        <li class="disabled"><a href="#">${index}</a></li>
+                                    <#else>
+                                        <li><a href="/sell/seller/order/list?page=${index}&size=10">${index}</a></li>
+                                    </#if>
+                                </#if>
                             <#else>
-                                <li><a href="/sell/seller/order/list?page=${index}&size=10">${index}</a></li>
+                                <#if currentPage == index>
+                                    <li class="disabled"><a href="#">${index}</a></li>
+                                <#else>
+                                    <li><a href="/sell/seller/order/list?page=${index}&size=10">${index}</a></li>
+                                </#if>
                             </#if>
                         </#list>
                         <#if currentPage gte orderDTOPage.getTotalPages()>
