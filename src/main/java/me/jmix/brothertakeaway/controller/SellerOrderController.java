@@ -3,6 +3,7 @@ package me.jmix.brothertakeaway.controller;
 import lombok.extern.slf4j.Slf4j;
 import me.jmix.brothertakeaway.dto.OrderDTO;
 import me.jmix.brothertakeaway.enums.controller.SellerOrderControllerEnum;
+import me.jmix.brothertakeaway.exception.controller.SellerOrderControllerException;
 import me.jmix.brothertakeaway.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,19 +56,19 @@ public class SellerOrderController {
         OrderDTO orderDTO;
         try {
             orderDTO = orderService.getOrderByOrderId(orderId);
-        } catch (RuntimeException e) {
+        } catch (SellerOrderControllerException e) {
             log.error("[卖家端取消订单]查询不到订单");
 
-            map.put("msg", SellerOrderControllerEnum.ORDER_MASTER_NOT_EXIST.getStateInfo());
+            map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/order/list");
 
             return new ModelAndView("common/error", map);
         }
+        orderService.cancelOrder(orderDTO);
 
         map.put("msg", SellerOrderControllerEnum.SUCCESS.getStateInfo());
-        
+        map.put("url", "/sell/seller/order/list");
 
-        orderService.cancelOrder(orderDTO);
-        return new ModelAndView("common/success");
+        return new ModelAndView("common/success", map);
     }
 }
