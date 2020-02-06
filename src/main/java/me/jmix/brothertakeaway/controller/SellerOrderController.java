@@ -52,8 +52,10 @@ public class SellerOrderController {
     @GetMapping("/cancel")
     public ModelAndView cancel(@RequestParam("orderId") String orderId) {
         Map<String, Object> map = new HashMap<>();
-        OrderDTO orderDTO = orderService.getOrderByOrderId(orderId);
-        if (orderDTO == null) {
+        OrderDTO orderDTO;
+        try {
+            orderDTO = orderService.getOrderByOrderId(orderId);
+        } catch (RuntimeException e) {
             log.error("[卖家端取消订单]查询不到订单");
 
             map.put("msg", SellerOrderControllerEnum.ORDER_MASTER_NOT_EXIST.getStateInfo());
@@ -61,6 +63,10 @@ public class SellerOrderController {
 
             return new ModelAndView("common/error", map);
         }
+
+        map.put("msg", SellerOrderControllerEnum.SUCCESS.getStateInfo());
+        
+
         orderService.cancelOrder(orderDTO);
         return new ModelAndView("common/success");
     }
