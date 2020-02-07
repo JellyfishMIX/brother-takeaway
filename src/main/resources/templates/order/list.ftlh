@@ -58,13 +58,13 @@
                                     <li><a href="/sell/seller/order/list?page=${index}&size=10">${index}</a></li>
                                 <#elseif index == orderDTOPage.getTotalPages()>
                                     <li><a href="/sell/seller/order/list?page=${index}&size=10">${index}</a></li>
-                                <#elseif index lt ${currentPage - 5}>
+                                <#elseif index lt currentPage - 5>
 
-                                <#elseif index == ${currentPage - 5}>
+                                <#elseif index == currentPage - 5>
                                     <li class="disabled"><a href="#">...</a></li>
-                                <#elseif index == ${currentPage + 5}>
+                                <#elseif index == currentPage + 5>
                                     <li class="disabled"><a href="#">...</a></li>
-                                <#elseif index gt #{currentPage + 5}>
+                                <#elseif index gt currentPage + 5>
 
                                 <#else>
                                     <#if currentPage == index>
