@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.jmix.brothertakeaway.dto.OrderDTO;
 import me.jmix.brothertakeaway.enums.controller.SellerOrderControllerEnum;
 import me.jmix.brothertakeaway.exception.controller.SellerOrderControllerException;
+import me.jmix.brothertakeaway.exception.service.OrderServiceException;
 import me.jmix.brothertakeaway.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,7 +57,7 @@ public class SellerOrderController {
         OrderDTO orderDTO;
         try {
             orderDTO = orderService.getOrderByOrderId(orderId);
-        } catch (SellerOrderControllerException e) {
+        } catch (OrderServiceException e) {
             log.error("[卖家端查询订单详情]发生异常，errMsg = {}", e.getMessage());
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/order/list");
@@ -79,7 +80,7 @@ public class SellerOrderController {
         OrderDTO orderDTO;
         try {
             orderDTO = orderService.getOrderByOrderId(orderId);
-        } catch (SellerOrderControllerException e) {
+        } catch (OrderServiceException e) {
             log.error("[卖家端完结订单]查询不到订单");
 
             map.put("msg", e.getMessage());
@@ -106,7 +107,7 @@ public class SellerOrderController {
         OrderDTO orderDTO;
         try {
             orderDTO = orderService.getOrderByOrderId(orderId);
-        } catch (SellerOrderControllerException e) {
+        } catch (OrderServiceException e) {
             log.error("[卖家端取消订单]查询不到订单");
 
             map.put("msg", e.getMessage());
