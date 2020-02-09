@@ -33,7 +33,7 @@
                                     <td>${orderDTO.orderStatus}</td>
                                     <td>${orderDTO.payStatus}</td>
                                     <td>${orderDTO.createTime}</td>
-                                    <td>详情</td>
+                                    <td><a href="/sell/seller/order/detail?orderId=${orderDTO.getOrderId()}">详情</a></td>
                                     <#if orderDTO.getOrderStatus() == 0>
                                         <td><a href="/sell/seller/order/cancel?orderId=${orderDTO.getOrderId()}">取消</a></td>
                                     <#else>

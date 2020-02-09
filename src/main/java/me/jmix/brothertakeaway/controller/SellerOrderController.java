@@ -46,6 +46,56 @@ public class SellerOrderController {
     }
 
     /**
+     * 卖家端查询订单详情
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/detail")
+    public ModelAndView detail(@RequestParam("orderId") String orderId) {
+        Map<String, Object> map = new HashMap<>();
+        OrderDTO orderDTO;
+        try {
+            orderDTO = orderService.getOrderByOrderId(orderId);
+        } catch (SellerOrderControllerException e) {
+            log.error("[卖家端查询订单详情]发生异常，errMsg = {}", e.getMessage());
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/order/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("orderDTO", orderDTO);
+
+        return new ModelAndView("order/detail", map);
+    }
+
+    /**
+     * 完结订单
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/finish")
+    public ModelAndView finish(@RequestParam("orderId") String orderId) {
+        Map<String, Object> map = new HashMap<>();
+        OrderDTO orderDTO;
+        try {
+            orderDTO = orderService.getOrderByOrderId(orderId);
+        } catch (SellerOrderControllerException e) {
+            log.error("[卖家端完结订单]查询不到订单");
+
+            map.put("msg", e.getMessage());
+            map.put("url", "sell/seller/order/list");
+
+            return new ModelAndView("common/error", map);
+        }
+        orderService.finishOrder(orderDTO);
+
+        map.put("msg", SellerOrderControllerEnum.SUCCESS.getStateInfo());
+        map.put("url", "/sell/seller/order/list");
+
+        return new ModelAndView("common/success", map);
+    }
+
+    /**
      * 取消订单
      * @param orderId
      * @return
