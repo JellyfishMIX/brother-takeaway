@@ -1,46 +1,53 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>卖家商品列表</title>
-        <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="container">
+<head>
+    <meta charset="utf-8">
+    <title>卖家商品列表</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/sell/css/style.css">
+</head>
+<body>
+<div id="wrapper" class="toggled">
+    <#--边栏sidebar-->
+    <#include "../common/nav.ftl">
+
+    <#--主要内容content-->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-condensed">
                         <thead>
-                            <tr>
-                                <th>订单Id</th>
-                                <th>姓名</th>
-                                <th>手机号</th>
-                                <th>地址</th>
-                                <th>金额</th>
-                                <th>订单状态</th>
-                                <th>支付状态</th>
-                                <th>创建时间</th>
-                                <th colspan="2">操作</th>
-                            </tr>
+                        <tr>
+                            <th>订单Id</th>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>地址</th>
+                            <th>金额</th>
+                            <th>订单状态</th>
+                            <th>支付状态</th>
+                            <th>创建时间</th>
+                            <th colspan="2">操作</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <#list orderDTOPage.content as orderDTO>
-                                <tr>
-                                    <td>${orderDTO.orderId}<br></td>
-                                    <td>${orderDTO.customerName}</td>
-                                    <td>${orderDTO.customerPhone}</td>
-                                    <td>${orderDTO.customerAddress}</td>
-                                    <td>${orderDTO.orderAmount}</td>
-                                    <td>${orderDTO.orderStatus}</td>
-                                    <td>${orderDTO.payStatus}</td>
-                                    <td>${orderDTO.createTime}</td>
-                                    <td><a href="/sell/seller/order/detail?orderId=${orderDTO.getOrderId()}">详情</a></td>
-                                    <#if orderDTO.getOrderStatus() == 0>
-                                        <td><a href="/sell/seller/order/cancel?orderId=${orderDTO.getOrderId()}">取消</a></td>
-                                    <#else>
+                        <#list orderDTOPage.content as orderDTO>
+                            <tr>
+                                <td>${orderDTO.orderId}<br></td>
+                                <td>${orderDTO.customerName}</td>
+                                <td>${orderDTO.customerPhone}</td>
+                                <td>${orderDTO.customerAddress}</td>
+                                <td>${orderDTO.orderAmount}</td>
+                                <td>${orderDTO.orderStatus}</td>
+                                <td>${orderDTO.payStatus}</td>
+                                <td>${orderDTO.createTime}</td>
+                                <td><a href="/sell/seller/order/detail?orderId=${orderDTO.getOrderId()}">详情</a></td>
+                                <#if orderDTO.getOrderStatus() == 0>
+                                    <td><a href="/sell/seller/order/cancel?orderId=${orderDTO.getOrderId()}">取消</a></td>
+                                <#else>
 
-                                    </#if>
-                                </tr>
-                            </#list>
+                                </#if>
+                            </tr>
+                        </#list>
                         </tbody>
                     </table>
                 </div>
@@ -90,5 +97,7 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

@@ -3,7 +3,6 @@ package me.jmix.brothertakeaway.controller;
 import lombok.extern.slf4j.Slf4j;
 import me.jmix.brothertakeaway.dto.OrderDTO;
 import me.jmix.brothertakeaway.enums.controller.SellerOrderControllerEnum;
-import me.jmix.brothertakeaway.exception.controller.SellerOrderControllerException;
 import me.jmix.brothertakeaway.exception.service.OrderServiceException;
 import me.jmix.brothertakeaway.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
