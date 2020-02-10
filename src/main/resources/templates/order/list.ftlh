@@ -1,14 +1,11 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>卖家商品列表</title>
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/sell/css/style.css">
-</head>
+
+<#include "../common/header.ftlh">
+
 <body>
 <div id="wrapper" class="toggled">
     <#--边栏sidebar-->
-    <#include "../common/nav.ftl">
+    <#include "../common/nav.ftlh">
 
     <#--主要内容content-->
     <div id="page-content-wrapper">
