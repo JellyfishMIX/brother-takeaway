@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum  SellerOrderControllerEnum {
-    SUCCESS(0, "操作成功"),
-    ORDER_MASTER_NOT_EXIST(-1001, "订单不存在");
+    FINISH_ORDER_SUCCESS(1001, "完结订单成功"),
+    CANCEL_ORDER_SUCCESS(1002, "取消订单成功");
 
     private Integer stateCode;
     private String stateInfo;

@@ -90,7 +90,7 @@ public class SellerOrderController {
         }
         orderService.finishOrder(orderDTO);
 
-        map.put("msg", SellerOrderControllerEnum.SUCCESS.getStateInfo());
+        map.put("msg", SellerOrderControllerEnum.FINISH_ORDER_SUCCESS.getStateInfo());
         map.put("url", "/sell/seller/order/list");
 
         return new ModelAndView("common/success", map);
@@ -117,7 +117,7 @@ public class SellerOrderController {
         }
         orderService.cancelOrder(orderDTO);
 
-        map.put("msg", SellerOrderControllerEnum.SUCCESS.getStateInfo());
+        map.put("msg", SellerOrderControllerEnum.CANCEL_ORDER_SUCCESS.getStateInfo());
         map.put("url", "/sell/seller/order/list");
 
         return new ModelAndView("common/success", map);
