@@ -3,7 +3,7 @@ package me.jmix.brothertakeaway.enums;
 import lombok.Getter;
 
 @Getter
-public enum ProductStateEnum {
+public enum ProductStateEnum implements CodeEnum {
     SHELVES(0, "上架"),
     DISCONTINUED(1, "下架");
 

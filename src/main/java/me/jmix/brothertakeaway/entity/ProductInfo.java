@@ -1,6 +1,9 @@
 package me.jmix.brothertakeaway.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import me.jmix.brothertakeaway.enums.ProductStateEnum;
+import me.jmix.brothertakeaway.utils.EnumUtil;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -44,4 +47,9 @@ public class ProductInfo {
     private Date createTime;
 
     private Date updateTime;
+
+    @JsonIgnore
+    public ProductStateEnum getProductStateEnum() {
+        return EnumUtil.getByCode(productStatus, ProductStateEnum.class);
+    }
 }
