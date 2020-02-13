@@ -106,6 +106,11 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    /**
+     * 上架
+     * @param productId
+     * @return
+     */
     @Override
     public ProductInfo onSale(String productId) {
         ProductInfo productInfo = productInfoRepository.findById(productId).orElse(null);
@@ -121,6 +126,11 @@ public class ProductServiceImpl implements ProductService {
         return productInfoRepository.save(productInfo);
     }
 
+    /**
+     * 下架
+     * @param productId
+     * @return
+     */
     @Override
     public ProductInfo offSale(String productId) {
         ProductInfo productInfo = productInfoRepository.findById(productId).orElse(null);
