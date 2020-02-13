@@ -61,4 +61,20 @@ class ProductServiceImplTest {
         ProductInfo productInfoResult = productService.addProduct(productInfo);
         assertNotNull(productInfoResult);
     }
+
+    @Test
+    @Disabled
+    void onSale() {
+        String productId = "123456";
+        ProductInfo productInfoResult = productService.onSale(productId);
+        assertEquals(ProductStateEnum.SHELVES.getStateCode(), productInfoResult.getProductStatus());
+    }
+
+    @Test
+    @Disabled
+    void offSale() {
+        String productId = "123456";
+        ProductInfo productInfoResult = productService.offSale(productId);
+        assertEquals(ProductStateEnum.DISCONTINUED.getStateCode(), productInfoResult.getProductStatus());
+    }
 }

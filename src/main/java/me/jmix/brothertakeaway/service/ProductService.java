@@ -45,4 +45,16 @@ public interface ProductService {
      * @param shoppingCartDTOList
      */
     void decreaseStock(List<ShoppingCartDTO> shoppingCartDTOList);
+
+    /**
+     * 上架
+     * @param productId
+     */
+    ProductInfo onSale(String productId);
+
+    /**
+     * 下架
+     * @param productId
+     */
+    ProductInfo offSale(String productId);
 }
