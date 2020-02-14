@@ -49,6 +49,7 @@ public class SellerProductController {
         }
 
         map.put("url", "/sell/seller/product/list");
+
         return new ModelAndView("common/success", map);
     }
 
@@ -59,11 +60,12 @@ public class SellerProductController {
             productService.offSale(productId);
         } catch (ProductServiceException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "sell/seller/product/list");
+            map.put("url", "/sell/seller/product/list");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "sell/seller/product/list");
+        map.put("url", "/sell/seller/product/list");
+
         return new ModelAndView("common/success", map);
     }
 }
