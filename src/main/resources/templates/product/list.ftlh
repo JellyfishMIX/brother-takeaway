@@ -41,9 +41,9 @@
                                 <td>${productInfo.updateTime}</td>
                                 <td><a href="/sell/seller/product/index?productId=${productInfo.productId}">修改</a></td>
                                 <#if productInfo.productStatus == 0>
-                                    <td><a href="/sell/seller/product/up?productId=${productInfo.productId}">下架</a></td>
+                                    <td><a href="/sell/seller/product/offsale?productId=${productInfo.productId}">下架</a></td>
                                 <#else>
-                                    <td><a href="/sell/seller/product/down?productId=${productInfo.productId}">上架</a></td>
+                                    <td><a href="/sell/seller/product/onsale?productId=${productInfo.productId}">上架</a></td>
                                 </#if>
                             </tr>
                         </#list>

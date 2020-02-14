@@ -2,6 +2,7 @@ package me.jmix.brothertakeaway.controller;
 
 import me.jmix.brothertakeaway.dto.OrderDTO;
 import me.jmix.brothertakeaway.entity.ProductInfo;
+import me.jmix.brothertakeaway.exception.service.ProductServiceException;
 import me.jmix.brothertakeaway.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,5 +35,35 @@ public class SellerProductController {
 
         ModelAndView modelAndView = new ModelAndView("product/list", map);
         return modelAndView;
+    }
+
+    @GetMapping("/onsale")
+    public ModelAndView onSale(@RequestParam("productId") String productId) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            productService.onSale(productId);
+        } catch (ProductServiceException e) {
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/product/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("url", "/sell/seller/product/list");
+        return new ModelAndView("common/success", map);
+    }
+
+    @GetMapping("/offsale")
+    public ModelAndView offSale(@RequestParam("productId") String productId) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            productService.offSale(productId);
+        } catch (ProductServiceException e) {
+            map.put("msg", e.getMessage());
+            map.put("url", "sell/seller/product/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("url", "sell/seller/product/list");
+        return new ModelAndView("common/success", map);
     }
 }
