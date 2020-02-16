@@ -116,6 +116,7 @@ public class SellerProductController {
         }
 
         map.put("url", "/sell/seller/product/list");
-        return new ModelAndView("common/success");
+
+        return new ModelAndView("common/success", map);
     }
 }
