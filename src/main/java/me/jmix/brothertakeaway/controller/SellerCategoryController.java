@@ -30,7 +30,7 @@ public class SellerCategoryController {
     @GetMapping("/index")
     public ModelAndView index(@RequestParam(value = "categoryId", required = false) Integer categoryId) {
         Map<String, Object> map = new HashMap<>();
-        if (categoryId > 0) {
+        if (categoryId != null) {
             ProductCategory productCategory = productCategoryService.getOneByCategoryId(categoryId);
             map.put("productCategory", productCategory);
         }
