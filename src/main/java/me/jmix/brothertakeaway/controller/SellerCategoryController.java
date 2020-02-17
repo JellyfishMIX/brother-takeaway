@@ -1,0 +1,28 @@
+package me.jmix.brothertakeaway.controller;
+
+import me.jmix.brothertakeaway.entity.ProductCategory;
+import me.jmix.brothertakeaway.service.ProductCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+@RequestMapping("/seller/category")
+public class SellerCategoryController {
+    @Autowired
+    private ProductCategoryService productCategoryService;
+
+    @GetMapping("/list")
+    public ModelAndView list() {
+        Map<String, Object> map = new HashMap<>();
+        List<ProductCategory> productCategoryList = productCategoryService.getAllProductCategory();
+        map.put("productCategoryList", productCategoryList);
+        return new ModelAndView("product_category/list", map);
+    }
+}
