@@ -6,6 +6,7 @@ import me.jmix.brothertakeaway.exception.service.ProductServiceException;
 import me.jmix.brothertakeaway.form.ProductForm;
 import me.jmix.brothertakeaway.service.ProductCategoryService;
 import me.jmix.brothertakeaway.service.ProductService;
+import me.jmix.brothertakeaway.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -104,7 +105,12 @@ public class SellerProductController {
             return new ModelAndView("common/error", map);
         }
 
-        ProductInfo productInfo = productService.getProductInfoByProductId(productForm.getProductId());
+        ProductInfo productInfo = new ProductInfo();
+        if (!StringUtils.isEmpty(productForm.getProductId())) {
+            productInfo = productService.getProductInfoByProductId(productForm.getProductId());
+        } else {
+            productForm.setProductId(KeyUtil.getUniqueKey());
+        }
         BeanUtils.copyProperties(productForm, productInfo);
 
         try {
