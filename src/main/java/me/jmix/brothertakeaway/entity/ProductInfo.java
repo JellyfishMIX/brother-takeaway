@@ -39,7 +39,7 @@ public class ProductInfo {
     private String productIcon;
 
     // 商品状态，0上架，1下架
-    private Integer productStatus;
+    private Integer productStatus = ProductStateEnum.SHELVES.getStateCode();
 
     // 类目编号
     private Integer categoryType;

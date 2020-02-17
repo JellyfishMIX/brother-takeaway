@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -24,5 +25,16 @@ public class SellerCategoryController {
         List<ProductCategory> productCategoryList = productCategoryService.getAllProductCategory();
         map.put("productCategoryList", productCategoryList);
         return new ModelAndView("product_category/list", map);
+    }
+
+    @GetMapping("/index")
+    public ModelAndView index(@RequestParam(value = "categoryId", required = false) Integer categoryId) {
+        Map<String, Object> map = new HashMap<>();
+        if (categoryId > 0) {
+            ProductCategory productCategory = productCategoryService.getOneByCategoryId(categoryId);
+            map.put("productCategory", productCategory);
+        }
+
+        return new ModelAndView("product_category/index", map);
     }
 }
