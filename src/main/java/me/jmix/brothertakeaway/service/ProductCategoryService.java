@@ -12,4 +12,6 @@ public interface ProductCategoryService {
     List<ProductCategory> getListByCategoryTypeIn(List<Integer> categoryTypeList);
 
     ProductCategory addProductCategory(ProductCategory productCategory);
+
+    ProductCategory updateProductCategory(ProductCategory productCategory);
 }
