@@ -1,6 +1,6 @@
 create table `seller_info` (
     `seller_id` varchar(32) not null,
-    `user_name` varchar(32) not null,
+    `username` varchar(32) not null,
     `password` varchar(32) not null,
     `openid` varchar(64) not null comment '微信openid',
     `create_time` timestamp not null default current_timestamp comment '创建时间',
