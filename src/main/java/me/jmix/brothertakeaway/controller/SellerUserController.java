@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +43,6 @@ public class SellerUserController {
         }
 
         // 2. 设置token至redis
-        // stringRedisTemplate.opsForValue().set("abc", "testValue");
         String token = UUID.randomUUID().toString();
         Integer expire = RedisConstant.EXPIRE;
 
@@ -54,7 +55,23 @@ public class SellerUserController {
     }
 
     @GetMapping("logout")
-    public void logout() {
+    public ModelAndView logout(HttpServletRequest httpServletRequest,
+                       HttpServletResponse httpServletResponse) {
+        Map<String, Object> modelAndViewMap = new HashMap<>();
+        // 1. 从cookie中查询
+        Cookie cookie = CookieUtil.get(httpServletRequest, CookieConstant.TOKEN);
+        if (cookie != null) {
+            // 2. 清除redis
+            stringRedisTemplate.opsForValue().getOperations().delete(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
 
+            // 3. 清除cookie
+            CookieUtil.set(httpServletResponse, CookieConstant.TOKEN, null, 0);
+        }  // 如果cookie为null， 正好省去了清除步骤，也是登出成功的
+
+
+        modelAndViewMap.put("msg", SellerUserControllerEnum.LOGOUT_SUCCESS);
+        modelAndViewMap.put("url", "sell/seller/order/list");
+
+        return new ModelAndView("common/success", modelAndViewMap);
     }
 }
