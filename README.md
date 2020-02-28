@@ -21,6 +21,8 @@ freemarker@2.3.28
 
 mysql@8.0.17
 
+redis@3.2.8
+
 ### Server
 
 VirtualBox@6.1--CentOS@7.3
