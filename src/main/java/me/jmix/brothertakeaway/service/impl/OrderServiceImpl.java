@@ -15,6 +15,7 @@ import me.jmix.brothertakeaway.enums.PayStateEnum;
 import me.jmix.brothertakeaway.exception.service.OrderServiceException;
 import me.jmix.brothertakeaway.service.OrderService;
 import me.jmix.brothertakeaway.service.ProductService;
+import me.jmix.brothertakeaway.service.PushMessageService;
 import me.jmix.brothertakeaway.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailRepository orderDetailRepository;
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+    @Autowired
+    private PushMessageService pushMessageService;
 
     /**
      * 创建订单
@@ -208,6 +211,9 @@ public class OrderServiceImpl implements OrderService {
             log.info("[完结订单]订单状态更新失败，orderId = {}, orderStatus = {}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
             throw new OrderServiceException(OrderServiceStateEnum.ORDER_STATUS_UPDATE_FAILED);
         }
+
+        // 推送微信模板消息
+        pushMessageService.orderStatus(orderDTO);
 
         return orderDTO;
     }
