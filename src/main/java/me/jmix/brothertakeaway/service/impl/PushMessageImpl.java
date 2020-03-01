@@ -27,7 +27,7 @@ public class PushMessageImpl implements PushMessageService {
     @Override
     public void orderStatus(OrderDTO orderDTO) {
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser("oEpDEwHtszhRqhg2S2R4_hVkVVDE")
+                .toUser(orderDTO.getCustomerOpenid())
                 .templateId(accountConfig.getTemplateId().get("orderStatus"))
                 .build();
         templateMessage.addWxMpTemplateData(new WxMpTemplateData("first", "亲，请记得收货哦。"));
