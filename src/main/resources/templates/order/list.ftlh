@@ -100,7 +100,7 @@
 <script>
     var websocket = null;
     if ('websocket' in window) {
-        websocket = new WebSocket('ws://');
+        websocket = new WebSocket('ws://127.0.0.1:8080/sell/webSocket');
 
         websocket.onopen = function (event) {
             console.log('建立连接');
