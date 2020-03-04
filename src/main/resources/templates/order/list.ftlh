@@ -102,28 +102,30 @@
     if ('websocket' in window) {
         websocket = new WebSocket('ws://127.0.0.1:8080/sell/webSocket');
 
-        websocket.onopen = function (event) {
-            console.log('建立连接');
-        };
-
-        websocket.onclose = function (event) {
-            console.log('连接关闭')
-        };
-
-        websocket.onmessage = function (event) {
-            console.log('收到消息' + event.data())
-            // 弹窗提醒，播放音乐
-        };
-
-        websocket.onerror = function (event) {
-            alert('websocket通信发生错误');
-        };
-
-        window.onbeforeunload = function (event) {
-            websocket.close();
-        }
     } else {
         alert('该浏览器不支持websocket');
+    }
+
+    // 监测websocket生命周期函数
+    websocket.onopen = function (event) {
+        console.log('建立连接');
+    };
+
+    websocket.onclose = function (event) {
+        console.log('连接关闭')
+    };
+
+    websocket.onmessage = function (event) {
+        console.log('收到消息' + event.data())
+        // 弹窗提醒，播放音乐
+    };
+
+    websocket.onerror = function (event) {
+        alert('websocket通信发生错误');
+    };
+
+    window.onbeforeunload = function (event) {
+        websocket.close();
     }
 </script>
 </body>
