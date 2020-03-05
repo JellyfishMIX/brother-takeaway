@@ -108,20 +108,20 @@
 
     // 监测websocket生命周期函数
     websocket.onopen = function (event) {
-        console.log('建立连接');
+        console.log('【建立连接】');
     };
 
     websocket.onclose = function (event) {
-        console.log('连接关闭')
+        console.log('【建立连接】')
     };
 
     websocket.onmessage = function (event) {
-        console.log('收到消息' + event.data())
+        console.log('【收到消息】' + event.data)
         // 弹窗提醒，播放音乐
     };
 
     websocket.onerror = function (event) {
-        alert('websocket通信发生错误');
+        alert('【连接错误】websocket通信发生错误');
     };
 
     window.onbeforeunload = function (event) {

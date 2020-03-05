@@ -16,6 +16,7 @@ import me.jmix.brothertakeaway.exception.service.OrderServiceException;
 import me.jmix.brothertakeaway.service.OrderService;
 import me.jmix.brothertakeaway.service.ProductService;
 import me.jmix.brothertakeaway.service.PushMessageService;
+import me.jmix.brothertakeaway.service.WebSocket;
 import me.jmix.brothertakeaway.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderMasterRepository orderMasterRepository;
     @Autowired
     private PushMessageService pushMessageService;
+    @Autowired
+    private WebSocket webSocket;
 
     /**
      * 创建订单
@@ -84,6 +87,9 @@ public class OrderServiceImpl implements OrderService {
         List<ShoppingCartDTO> shoppingCartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
                 new ShoppingCartDTO(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
         productService.decreaseStock(shoppingCartDTOList);
+
+        // 发送websocket消息
+        webSocket.sendMessage("有新的订单");
 
         return orderDTO;
     }
