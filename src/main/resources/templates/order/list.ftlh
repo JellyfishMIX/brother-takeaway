@@ -34,8 +34,10 @@
                                 <td>${orderDTO.customerPhone}</td>
                                 <td>${orderDTO.customerAddress}</td>
                                 <td>${orderDTO.orderAmount}</td>
-                                <td>${orderDTO.orderStatus}</td>
-                                <td>${orderDTO.payStatus}</td>
+                                <#--<td>${orderDTO.orderStatus}</td>-->
+                                <td>${orderDTO.getOrderMasterStateEnum().getStateInfo()}</td>
+                                <#--<td>${orderDTO.payStatus}</td>-->
+                                <td>${orderDTO.getPayStateEnum().getStateInfo()}</td>
                                 <td>${orderDTO.createTime}</td>
                                 <td><a href="/sell/seller/order/detail?orderId=${orderDTO.getOrderId()}">详情</a></td>
                                 <#if orderDTO.getOrderStatus() == 0>

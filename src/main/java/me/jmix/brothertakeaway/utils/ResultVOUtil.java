@@ -17,4 +17,9 @@ public class ResultVOUtil {
         resultVO.setData(data);
         return resultVO;
     }
+
+    // public static ResultVO error(String stateInfo, Object data) {
+    //     ResultVO resultVO = new ResultVO();
+    //     resultVO.setCode();
+    // }
 }
