@@ -6,12 +6,12 @@ import lombok.Getter;
 public class SellException extends RuntimeException {
     private static final long serialVersionUID = 2930168342534521500L;
 
-    private static String exceptionClassName;
+    private String exceptionClassName;
 
     private Integer stateCode;
     private String stateInfo;
 
-    public SellException(String message) {
-        super(message);
+    public SellException(String msg) {
+        super(msg);
     }
 }

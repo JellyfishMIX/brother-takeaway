@@ -18,8 +18,12 @@ public class ResultVOUtil {
         return resultVO;
     }
 
-    // public static ResultVO error(String stateInfo, Object data) {
-    //     ResultVO resultVO = new ResultVO();
-    //     resultVO.setCode();
-    // }
+    // 表示异常的ResultVO
+    public static ResultVO error(String exceptionClassName, Integer stateCode, String errMsg) {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setExceptionClassName(exceptionClassName);
+        resultVO.setCode(stateCode);
+        resultVO.setMsg(errMsg);
+        return resultVO;
+    }
 }
