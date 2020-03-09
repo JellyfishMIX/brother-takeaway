@@ -33,6 +33,7 @@ public class SellerExceptionHandler {
     // 拦截卖家异常
     @ExceptionHandler(value = SellException.class)
     @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResultVO handlerSellerException(SellException e) {
         return ResultVOUtil.error(e.getExceptionClassName(), e.getStateCode(), e.getStateInfo());
     }
