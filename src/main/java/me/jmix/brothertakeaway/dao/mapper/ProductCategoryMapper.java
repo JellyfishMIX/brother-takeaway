@@ -1,7 +1,7 @@
 package me.jmix.brothertakeaway.dao.mapper;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
+
 
 import java.util.Map;
 
@@ -12,6 +12,6 @@ public interface ProductCategoryMapper {
      * @param map
      * @return
      */
-    @Insert("insert into product_category(category_name, category_type) values (#{categoryName, jdbcType=VARCHAR}, #{category_type, categoryType, jdbcType=INTEGER})")
+    @Insert("insert into tb_product_category(category_name, category_type) values (#{categoryName, jdbcType=VARCHAR}, #{category_type, categoryType, jdbcType=INTEGER})")
     int insertByMap(Map<String, Object> map);
 }
