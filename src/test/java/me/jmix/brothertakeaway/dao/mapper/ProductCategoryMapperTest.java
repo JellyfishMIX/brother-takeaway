@@ -59,9 +59,17 @@ class ProductCategoryMapperTest {
     @Test
     @Disabled
     void updateByCategoryType() {
-        String categoryName = "炸食";
+        String categoryName = "师兄最不爱";
         Integer categoryType = 102;
         int result = productCategoryMapper.updateByCategoryType(categoryName, categoryType);
+        assertEquals(1, result);
+    }
+
+    @Test
+    @Disabled
+    void deleteByCategoryType() {
+        Integer categoryType = 102;
+        int result = productCategoryMapper.deleteByCategoryType(categoryType);
         assertEquals(1, result);
     }
 }

@@ -9,6 +9,8 @@ import java.util.Map;
 
 @Component(value = "productCategoryMapper")
 public interface ProductCategoryMapper {
+    // mybatis 注解方式
+
     /**
      * 通过Map插入
      * 返回值为插入的条数
@@ -55,6 +57,30 @@ public interface ProductCategoryMapper {
     })
     List<ProductCategory> findByCategoryName(String categoryName);
 
+    /**
+     * 通过categoryType修改
+     * @param categoryName
+     * @param categoryType
+     * @return
+     */
     @Update("update tb_product_category set category_name = #{categoryName} where category_type = #{categoryType}")
-    int updateByCategoryType(String categoryName, Integer categoryType);
+    int updateByCategoryType(@Param("categoryName") String categoryName, @Param("categoryType") Integer categoryType);
+
+    /**
+     * 通过categoryType删除对应的row
+     * @param categoryType
+     * @return
+     */
+    @Delete("delete from tb_product_category where category_type = #{categoryType}")
+    int deleteByCategoryType(Integer categoryType);
+
+    // mybatis xml方式
+
+    /**
+     * 通过categoryType查询productCategory
+     * 由于categoryType为constraint key, 所以结果返回单条
+     * @param categoryType
+     * @return
+     */
+    ProductCategory selectByCategoryType(Integer categoryType);
 }
