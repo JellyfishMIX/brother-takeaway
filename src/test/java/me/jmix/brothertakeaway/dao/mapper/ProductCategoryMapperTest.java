@@ -76,7 +76,7 @@ class ProductCategoryMapperTest {
     @Test
     @Disabled
     void selectByCategoryType() {
-        Integer categoryType = 102;
+        Integer categoryType = 101;
         ProductCategory productCategoryResult = productCategoryMapper.selectByCategoryType(categoryType);
         assertNotNull(productCategoryResult);
     }

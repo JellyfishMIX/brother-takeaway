@@ -140,6 +140,7 @@
     // 监测websocket生命周期函数
     websocket.onopen = function (event) {
         console.log('【建立连接】');
+        websocket.send("测试字符串");
     };
 
     websocket.onclose = function (event) {
@@ -148,10 +149,10 @@
 
     websocket.onmessage = function (event) {
         console.log('【收到消息】' + event.data);
-        // 弹窗提醒，播放音乐
-        $('#myModal').modal('show');
-
-        document.getElementById('notice').play();
+        // // 弹窗提醒，播放音乐
+        // $('#myModal').modal('show');
+        //
+        // document.getElementById('notice').play();
     };
 
     websocket.onerror = function (event) {
