@@ -8,7 +8,7 @@ import me.jmix.brothertakeaway.exception.SellException;
 public class SellerOrderControllerException extends SellException {
     private static final long serialVersionUID = 9216277450989886105L;
 
-    private static final String exceptionClassName = Thread.currentThread().getStackTrace()[1].getClassName();
+    private String exceptionClassName = this.getClass().getName();
 
     private Integer stateCode;
     private String stateInfo;
