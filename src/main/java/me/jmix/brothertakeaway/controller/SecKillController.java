@@ -15,7 +15,6 @@ public class SecKillController {
     @Autowired
     private SecKillService secKillService;
 
-
     @GetMapping("/query/{productId}")
     public String query(@PathVariable String productId) {
         return secKillService.querySecKillProductInfo(productId);
