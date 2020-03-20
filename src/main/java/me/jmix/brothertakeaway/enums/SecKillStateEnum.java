@@ -2,6 +2,7 @@ package me.jmix.brothertakeaway.enums;
 
 import lombok.Getter;
 
+
 @Getter
 public enum SecKillStateEnum {
     NO_STOCK(-1001, "没有库存了"),

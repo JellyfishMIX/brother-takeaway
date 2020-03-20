@@ -2,8 +2,15 @@ package me.jmix.brothertakeaway.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
+/**
+ * @author JellyfishMIX
+ */
 @Data
-public class ResultVO<T> {
+public class ResultVO<T> implements Serializable {
+    private static final long serialVersionUID = -1976264085475773430L;
+
     // 表示异常的ResultVO需要使用此成员变量
     private String exceptionClassName;
 

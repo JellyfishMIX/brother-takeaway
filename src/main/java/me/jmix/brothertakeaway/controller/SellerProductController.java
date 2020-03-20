@@ -9,6 +9,7 @@ import me.jmix.brothertakeaway.service.ProductService;
 import me.jmix.brothertakeaway.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -96,6 +97,7 @@ public class SellerProductController {
     }
 
     @PostMapping("/save")
+    @CacheEvict(cacheNames = "prodcut", key = "123")
     public ModelAndView save(@Valid ProductForm productForm,
                              BindingResult bindingResult) {
         Map<String, Object> map = new HashMap<>();

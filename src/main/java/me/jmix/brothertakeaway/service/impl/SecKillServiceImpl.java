@@ -13,14 +13,19 @@ import java.util.Map;
 
 @Service
 public class SecKillServiceImpl implements SecKillService {
-    private static final int TIMEOUT = 10 * 1000;   // 超时时间 10s
+    /**
+     * 超时时间 10s
+     */
+    private static final int TIMEOUT = 10 * 1000;
 
     @Autowired
     private RedisLock redisLock;
 
     // 使用Map模拟产品表
 
-    // 国庆活动，皮蛋粥特价，限量10000份
+    /**
+     * 国庆活动，皮蛋粥特价，限量10000份
+     */
     private static Map<String, Integer> products;
     private static Map<String, Integer> stock;
     private static Map<String, String> orders;
@@ -29,8 +34,10 @@ public class SecKillServiceImpl implements SecKillService {
         products = new HashMap<>();
         stock = new HashMap<>();
         orders = new HashMap<>();
-        products.put("123456", 10000);  // 表示总库存
-        stock.put("123456", 10000); // 表示剩余库存
+        // 表示总库存
+        products.put("123456", 10000);
+        // 表示剩余库存
+        stock.put("123456", 10000);
     }
 
     /**
