@@ -32,7 +32,7 @@ public class CustomerProductController {
      */
     // @GetMapping("/getproductlist")
     @GetMapping("/list")
-    @Cacheable(cacheNames = "product", key = "123")
+    @Cacheable(cacheNames = "product", key = "123", unless = "#result.getCode() != 0")
     public ResultVO getProductList() {
         // 1. 查询所有上架商品
         List<ProductInfo> productInfoList = productService.getShelvesProductInfo();

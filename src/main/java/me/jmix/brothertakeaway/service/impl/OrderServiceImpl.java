@@ -20,6 +20,7 @@ import me.jmix.brothertakeaway.service.WebSocket;
 import me.jmix.brothertakeaway.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -79,7 +80,8 @@ public class OrderServiceImpl implements OrderService {
         orderDTO.setOrderStatus(OrderMasterStateEnum.NEW.getStateCode());
         orderDTO.setPayStatus(PayStateEnum.WAIT.getStateCode());
         OrderMaster orderMaster = new OrderMaster();
-        BeanUtils.copyProperties(orderDTO, orderMaster);    // 此步不可更换位置，否则会导致BeanUtils.copyProperties把空属性（orderId, orderAmount）拷贝进orderDetail中
+        // 此步不可更换位置，否则会导致BeanUtils.copyProperties把空属性（orderId, orderAmount）拷贝进orderDetail中
+        BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMasterRepository.save(orderMaster);
 
         // 4. 减库存
@@ -88,7 +90,7 @@ public class OrderServiceImpl implements OrderService {
                 new ShoppingCartDTO(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
         productService.decreaseStock(shoppingCartDTOList);
 
-        // 发送websocket消息
+        // 发送websocket消息，同步推
         webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;

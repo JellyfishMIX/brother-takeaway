@@ -35,8 +35,8 @@ public class WebSocket {
     @OnMessage
     public void onMessage(String message) {
         log.info("【websocket消息】收到客户端发来的消息：{}", message);
-        System.out.println(message);
-        sendMessage("客户端发送的字符串长度为：" + message.length());
+        // System.out.println(message);
+        // sendMessage("客户端发送的字符串长度为：" + message.length());
     }
 
     public void sendMessage(String message) {

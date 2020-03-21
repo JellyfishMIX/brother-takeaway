@@ -23,16 +23,17 @@ public interface ProductService {
 
     /**
      * 获取所有商品信息列表
+     * @param pageable
      * @return
      */
     Page<ProductInfo> getAllProductInfo(Pageable pageable);
 
     /**
-     * 新增一个产品
+     * 新增/修改一个产品
      * @param productInfo
      * @return
      */
-    ProductInfo addProduct(ProductInfo productInfo);
+    ProductInfo saveProduct(ProductInfo productInfo);
 
     /**
      * 加库存

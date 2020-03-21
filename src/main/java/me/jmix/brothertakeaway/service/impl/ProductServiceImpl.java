@@ -8,6 +8,9 @@ import me.jmix.brothertakeaway.enums.ProductStateEnum;
 import me.jmix.brothertakeaway.exception.service.ProductServiceException;
 import me.jmix.brothertakeaway.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "productInfo")
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductInfoRepository productInfoRepository;
@@ -26,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
+    @Cacheable(key = "#productId", condition = "#productId.length() > 3")
     public ProductInfo getProductInfoByProductId(String productId) {
         ProductInfo productInfo = productInfoRepository.findById(productId).orElse(null);
         return productInfo;
@@ -53,12 +58,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * 新增一个产品
+     * 新增/修改一个产品
      * @param productInfo
      * @return
      */
     @Override
-    public ProductInfo addProduct(ProductInfo productInfo) {
+    @CachePut(key = "#productInfo.productId", condition = "#productInfo.productId.length() > 3")
+    public ProductInfo saveProduct(ProductInfo productInfo) {
         ProductInfo productInfoResult = productInfoRepository.save(productInfo);
         return productInfoResult;
     }

@@ -58,7 +58,7 @@ class ProductServiceImplTest {
         productInfo.setProductStatus(ProductStateEnum.SHELVES.getStateCode());
         productInfo.setCategoryType(2);
 
-        ProductInfo productInfoResult = productService.addProduct(productInfo);
+        ProductInfo productInfoResult = productService.saveProduct(productInfo);
         assertNotNull(productInfoResult);
     }
 

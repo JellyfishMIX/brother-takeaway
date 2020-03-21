@@ -116,7 +116,7 @@ public class SellerProductController {
         BeanUtils.copyProperties(productForm, productInfo);
 
         try {
-            productService.addProduct(productInfo);
+            productService.saveProduct(productInfo);
         } catch (Exception e) {
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/product/index");
