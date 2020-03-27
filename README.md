@@ -31,14 +31,14 @@ VirtualBox@6.1--CentOS@7.3
 
 1. 使用自定义枚举工具，解决订单状态由整型数字转变为说明文字的需求
 
-me/jmix/brothertakeaway/utils/EnumUtil.java
+   me/jmix/brothertakeaway/utils/EnumUtil.java
 
-templates/order/list.ftlh
+   templates/order/list.ftlh
 
 2. 使用Redis做到了Session的共享，让SpringBoot的后端服务支持水平扩展
 
-me.jmix.brothertakeaway.controller/SellerUserController.java
+   me.jmix.brothertakeaway.controller/SellerUserController.java
 
 3. 引入Redis分布式锁
 
-me/jmix/brothertakeaway/service/RedisLock.java
+   me/jmix/brothertakeaway/service/RedisLock.java
