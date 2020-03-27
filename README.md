@@ -29,20 +29,16 @@ VirtualBox@6.1--CentOS@7.3
 
 ## 亮点
 
-1.
+1. 使用自定义枚举工具，解决订单状态由整型数字转变为说明文字的需求
 
 me/jmix/brothertakeaway/utils/EnumUtil.java
 
 templates/order/list.ftlh
 
-使用自定义枚举工具，解决订单状态由整型数字转变为说明文字的需求
+2. 使用Redis做到了Session的共享，让SpringBoot的后端服务支持水平扩展
 
-2.
+me.jmix.brothertakeaway.controller/SellerUserController.java
 
-使用Redis做到了Session的共享，让SpringBoot的后端服务支持水平扩展
+3. 引入Redis分布式锁
 
-3.
-
-me/jmix/brothertakeaway/service/RedisLock
-
-引入Redis分布式锁
+me/jmix/brothertakeaway/service/RedisLock.java
