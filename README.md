@@ -39,6 +39,10 @@ templates/order/list.ftlh
 
 2.
 
+使用Redis做到了Session的共享，让SpringBoot的后端服务支持水平扩展
+
+3.
+
 me/jmix/brothertakeaway/service/RedisLock
 
 引入Redis分布式锁
