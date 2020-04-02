@@ -31,7 +31,7 @@ VirtualBox@6.1--CentOS@7.3
 
 1. 使用自定义枚举工具，解决订单状态由整型数字转变为说明文字的需求
 
-   me/jmix/brothertakeaway/utils/EnumUtil.java
+   me.jmix.brothertakeaway.utils/EnumUtil.java
 
    templates/order/list.ftlh
 
@@ -41,4 +41,8 @@ VirtualBox@6.1--CentOS@7.3
 
 3. 引入Redis分布式锁
 
-   me/jmix/brothertakeaway/service/RedisLock.java
+   me.jmix.brothertakeaway.service/RedisLock.java
+
+4. 微信code-openid换取逻辑
+   me.jmix.brothertakeaway.controller/WeixinController
+   me.jmix.brothertakeaway.controller/WechatController
