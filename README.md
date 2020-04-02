@@ -44,5 +44,7 @@ VirtualBox@6.1--CentOS@7.3
    me.jmix.brothertakeaway.service/RedisLock.java
 
 4. 微信code-openid换取逻辑
+
    me.jmix.brothertakeaway.controller/WeixinController
+   
    me.jmix.brothertakeaway.controller/WechatController
