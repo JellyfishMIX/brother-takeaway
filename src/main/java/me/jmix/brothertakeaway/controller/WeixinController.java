@@ -11,6 +11,10 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/weixin")
 @Slf4j
 public class WeixinController {
+    /**
+     * 微信code-openid换取
+     * @param code
+     */
     @GetMapping("/auth")
     public void auth(@RequestParam("code") String code) {
         log.info("进入auth的方法");
