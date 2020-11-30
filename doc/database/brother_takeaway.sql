@@ -50,3 +50,14 @@ create table `tb_order_detail` (
     primary key (`detail_id`),
     key `index_order_id` (`order_id`)
 ) comment '订单详情表';
+
+create table `user_info` (
+    `id` varchar(32) not null,
+    `username` varchar(32) default '',
+    `password` varchar(32) default '',
+    `openid` varchar(64) default '' comment '微信openid',
+    `role` int not null comment '1买家2卖家',
+    `creation_time` timestamp not null default current_timestamp comment '创建时间，自动写入',
+    `modified_time` timestamp not null default current_timestamp on update current_timestamp comment '修改时间，自动写入',
+    primary key (`id`)
+) comment '用户表';

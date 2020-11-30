@@ -25,6 +25,13 @@ public class SellerAuthorizeAspect {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    /**
+     * public表示任何公共方法
+     * execution：用于匹配方法执行的连接点
+     * 第一个*代表所有的返回值类型
+     * 第二个*代表所有的类
+     * 第三个*代表类所有方法 最后一个..代表所有的参数
+     */
     @Pointcut("execution(public * me.jmix.brothertakeaway.controller.Seller*.*(..))" + "&& !execution(public * me.jmix.brothertakeaway.controller.SellerUserController.*(..))")
     public void verify() {}
 

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Data
 public class ProductInfoVO implements Serializable {
-    private static final long serialVersionUID = -6023194451057383431L;
+    private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")
     private String productId;

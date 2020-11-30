@@ -20,18 +20,20 @@ public class RedisLock {
      */
     public boolean lock(String key, String value) {
         // 此处redisTemplate.opsForValue().setIfAbsent(key, value)使用了redis官方文档的SETNX方法
+        // 将key设置值为value，如果key不存在，这种情况下等同SET命令。 当key存在时，什么也不做。SETNX是"SET if Not eXists"的简写。
+        // 此处.setIfAbsent(key, value)，如果key不存在，返回true，即设置成功。 当key存在时，返回false，即设置失败。
         if (redisTemplate.opsForValue().setIfAbsent(key, value)) {
             return true;
         }
 
-        // 如果出现线程阻塞，为防止死锁，需要设置锁有效期机制
+        // 如果解锁与开锁之间的业务代码出现线程阻塞，则后续线程拿到的都是已上锁，业务代码永远无法执行。为防止死锁，需要设置锁有效期机制
 
         String currentValue = redisTemplate.opsForValue().get(key);
         // 如果锁过期
         if (!StringUtils.isEmpty(currentValue) && (Long.parseLong(currentValue) < System.currentTimeMillis())) {
             // 获取上一个锁的时间
-            String oldValue = redisTemplate.opsForValue().getAndSet(key, value);
             // 如果有两个线程获取到了currentValue = A，这两个线程的value都是B，其中一个线程拿到锁
+            String oldValue = redisTemplate.opsForValue().getAndSet(key, value);
             if (!StringUtils.isEmpty(oldValue) && oldValue.equals(currentValue)) {
                 return true;
             }
