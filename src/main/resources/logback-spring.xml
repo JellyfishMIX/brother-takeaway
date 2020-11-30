@@ -73,9 +73,10 @@
 
     <!--指定使用的配置项-->
     <root level="info">
-        <appender-ref ref="consoleLog" />
-        <appender-ref ref="fileInfoLog" />
-        <appender-ref ref="fileWarnLog" />
-        <appender-ref ref="fileErrorLog" />
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="fileOverallLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileWarnLog"/>
+        <appender-ref ref="fileErrorLog"/>
     </root>
 </configuration>
