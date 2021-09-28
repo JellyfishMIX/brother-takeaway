@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!--控制台日志文件-->
     <!--appender 是一个小的配置项，class 是处理需要使用的类-->
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
-        <!--layout 是输出的格式-->
+        <!--输出的格式-->
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%d - %msg%n</pattern>
         </layout>
